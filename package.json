@@ -1,0 +1,30 @@
+{
+    "name": "coding-task",
+    "version": "1.0.0",
+    "description": "Towa Coding Task - Frontend Challenge",
+    "private": true,
+    "scripts": {
+      "build": "webpack --mode=production",
+      "start": "webpack serve --open --mode=development",
+      "test": "NODE_ENV=test mocha ./src/test.spec.js"
+    },
+    "keywords": [],
+    "author": "Kris Werner",
+    "devDependencies": {
+      "autoprefixer": "^10.4.16",
+      "copy-webpack-plugin": "^11.0.0",
+      "css-loader": "^6.8.1",
+      "html-webpack-plugin": "^5.5.3",
+      "mini-css-extract-plugin": "^2.7.6",
+      "mocha": "^10.2.0",
+      "postcss-loader": "^7.3.3",
+      "sass": "^1.69.5",
+      "sass-loader": "^13.3.2",
+      "terser-webpack-plugin": "^5.3.9",
+      "ts-loader": "^9.5.1",
+      "typescript": "^5.3.2",
+      "webpack": "^5.89.0",
+      "webpack-cli": "^5.1.4",
+      "webpack-dev-server": "^4.15.1"
+    }
+}  
