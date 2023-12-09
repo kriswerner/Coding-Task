@@ -1,12 +1,11 @@
 {
-    "compilerOptions": {
-      "target": "ES2022",
-      "module": "NodeNext",
-      "moduleResolution": "nodenext",
-      "lib": ["dom", "ES2022"],
-      "strict": true,
-      "esModuleInterop": true
-    },
-    "include": ["src/*.ts"],
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "nodenext",
+    "lib": ["dom", "ES2022"],
+    "strict": true
+  },
+  "include": ["src/*.ts", "declarations.d.ts"],
+  "exclude": ["node_modules"]
 }

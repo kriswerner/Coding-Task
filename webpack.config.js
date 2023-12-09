@@ -28,11 +28,26 @@ module.exports = {
           'postcss-loader',
           'sass-loader',
         ],
-      }
+        exclude: /\.component.scss$/i,
+      },
+      {
+        test: /\.component.html$/i,
+        use: [
+          'raw-loader',
+        ],
+      },
+      {
+        test: /\.component.scss$/i,
+        use: [
+          'raw-loader',
+          'sass-loader',
+          'postcss-loader',
+        ],
+      },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js', '.scss'],
+    extensions: ['.ts', '.js', '.scss', '.css'],
   },
   devServer: {
     static: './dist',
@@ -43,9 +58,15 @@ module.exports = {
       inject: false 
     }),
     new CopyPlugin({
-      patterns: [
-        { from: "src/assets", to: "assets" },
-      ],
+      patterns: [{
+        from: "src/assets",
+        to: "assets",
+        globOptions: {
+          ignore: [
+            '**/*.ttf',
+            ]
+        }
+      }],
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css',
