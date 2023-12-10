@@ -9,6 +9,10 @@ class MyCarousel extends HTMLElement {
     private intervalID: any;
     private currentSlideIndex: number | undefined = 1;
     private activeTransition: boolean | undefined;
+    private startTranslatePosition: number | undefined;
+    private currentTranslatePosition: number | undefined;
+    private isDragging: boolean = false;
+    private grabbing: boolean = false;
 
     constructor() {
         super();
@@ -37,6 +41,15 @@ class MyCarousel extends HTMLElement {
             pagination.append(paginationProgress);
             this.carouselPagination.append(pagination);
         });
+
+        // Add event listener for mobile and desktop touch events
+        this.carouselContainer.addEventListener('touchstart', (event) => this.touchStart(event));
+        this.carouselContainer.addEventListener('touchend', () => this.touchEnd());
+        this.carouselContainer.addEventListener('touchmove', (event) => this.touchMove(event));
+        this.carouselContainer.addEventListener('mousedown', (event) => this.touchStart(event));
+        this.carouselContainer.addEventListener('mouseup', () => this.touchEnd());
+        this.carouselContainer.addEventListener('mouseleave', () => this.touchEnd());
+        this.carouselContainer.addEventListener('mousemove', (event) => this.touchMove(event));
 
         // Add event listener for prev/next buttons
         shadowRoot.querySelector('.carousel__button--prev')!.addEventListener('click', this.prevSlide.bind(this));
@@ -171,6 +184,57 @@ class MyCarousel extends HTMLElement {
         this.intervalID = setInterval(() => {
             this.nextSlide();
         }, this.interval);
+    }
+
+    // TouchStart event handling
+    private touchStart(event: any) {
+        event.preventDefault();
+        this.isDragging = true;
+        this.startTranslatePosition = this.getPositionX(event);
+    }
+
+    // TouchMove event handling
+    private touchMove(event: any) {
+        event.preventDefault();
+        if (this.isDragging) {
+            this.grabbing = true;
+            
+            // calculate current translate position and apply it to carousel slides container
+            this.currentTranslatePosition = this.getPositionX(event) - this.startTranslatePosition! - this.clientWidth;
+            this.carouselContainer.style.transform = `translateX(${this.currentTranslatePosition}px)`;
+        }
+    }
+
+    // TouchEnd event handling
+    private touchEnd() {
+        this.isDragging = false;
+        if (this.grabbing) {
+            let offsetX = this.clientWidth + this.currentTranslatePosition!;
+            if (offsetX < 0) {
+                // if offset is greater then 1/3 of the screen width make
+                // transiton to next slide else reset to the current one
+                if (offsetX*-1 > this.clientWidth/3) {
+                    this.nextSlide();
+                } else {
+                    this.resetSlide();
+                }
+            }
+            if (offsetX > 0) {
+                // if offset is greater then 1/3 of the screen width make
+                // transiton to previous slide else reset to the current one
+                if (offsetX > this.clientWidth/3) {
+                    this.prevSlide();
+                } else {
+                    this.resetSlide();
+                }
+            }
+            this.grabbing = false;
+        }
+    }
+
+    // get position x from touch event depending on input type
+    private getPositionX(event: any) {
+        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
     }
 }
 

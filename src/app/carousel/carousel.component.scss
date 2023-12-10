@@ -12,6 +12,7 @@
         height: 100%;
         transform: translateX(-100%);
         z-index: 1;
+        cursor: grab;
 
         .carousel__slide {
             position: relative;
