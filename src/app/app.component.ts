@@ -23,8 +23,14 @@ class MyApp extends HTMLElement {
         this.template!.content.querySelector('template')!.remove();
 
         // build carousel slides and append them to the shadow root
-        this.buildCarouselSlides(this.carouselData);
-        shadowRoot.appendChild(this.template!.content.cloneNode(true));
+        //this.buildCarouselSlides(this.carouselData);
+        //shadowRoot.appendChild(this.template!.content.cloneNode(true));
+
+        // build carousel slides with json data from dummyjson
+        this.fetchJSONFile('https://dummyjson.com/products', (data:any) => {
+            this.buildCarouselSlides(data);
+            shadowRoot.appendChild(this.template!.content.cloneNode(true));
+        });
     }
 
     // build the carousel slides using the html template and data from json object
@@ -36,6 +42,21 @@ class MyApp extends HTMLElement {
             carouselSlide.querySelector('p')!.innerText = product.description;
             this.template!.content.querySelector('my-carousel')!.append(carouselSlide!);
         });
+    }
+
+    // request json file and execute a callback with the parsed result
+    private fetchJSONFile(path: any, callback: any) {
+        let httpRequest = new XMLHttpRequest();
+        httpRequest.onreadystatechange = function() {
+            if (httpRequest.readyState === 4) {
+                if (httpRequest.status === 200) {
+                    let data = JSON.parse(httpRequest.responseText);
+                    if (callback) callback(data);
+                }
+            }
+        };
+        httpRequest.open('GET', path);
+        httpRequest.send();
     }
 }
 
