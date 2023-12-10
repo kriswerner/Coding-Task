@@ -47,7 +47,7 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ['.ts', '.js', '.scss', '.css'],
+    extensions: ['.ts', '.js', '.scss'],
   },
   devServer: {
     static: './dist',
@@ -71,7 +71,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'style.css',
     }),
-  ],
+    ],
   optimization: {
     minimizer: [new TerserPlugin()],
   },

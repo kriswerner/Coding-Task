@@ -1,0 +1,32 @@
+{
+    "products": [
+        {
+            "title": "Ihr zuverlässiger Partner für den Werkzeug-, Formen- und Maschinenbau",
+            "description": "Das Unternehmen Meusburger ist Marktführer im Bereich hochpräziser Normalien. Weltweit nutzen Kunden die Vorteile der Standardisierung und profitieren von über 55 Jahren Erfahrung in der Bearbeitung von Stahl.",
+            "images": [
+                "assets/images/image1.jpg"
+            ]
+        },
+        {
+            "title": "Ihr zuverlässiger Partner für den Werkzeug-, Formen- und Maschinenbau",
+            "description": "Das Unternehmen Meusburger ist Marktführer im Bereich hochpräziser Normalien. Weltweit nutzen Kunden die Vorteile der Standardisierung und profitieren von über 55 Jahren Erfahrung in der Bearbeitung von Stahl.",
+            "images": [
+                "assets/images/image2.jpg"
+            ]
+        },
+        {
+            "title": "Ihr zuverlässiger Partner für den Werkzeug-, Formen- und Maschinenbau",
+            "description": "Das Unternehmen Meusburger ist Marktführer im Bereich hochpräziser Normalien. Weltweit nutzen Kunden die Vorteile der Standardisierung und profitieren von über 55 Jahren Erfahrung in der Bearbeitung von Stahl.",
+            "images": [
+                "assets/images/image3.jpg"
+            ]
+        },
+        {
+            "title": "Ihr zuverlässiger Partner für den Werkzeug-, Formen- und Maschinenbau",
+            "description": "Das Unternehmen Meusburger ist Marktführer im Bereich hochpräziser Normalien. Weltweit nutzen Kunden die Vorteile der Standardisierung und profitieren von über 55 Jahren Erfahrung in der Bearbeitung von Stahl.",
+            "images": [
+                "assets/images/image4.jpg"
+            ]
+        }
+    ]
+}
