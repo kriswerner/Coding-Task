@@ -13,6 +13,7 @@
         transform: translateX(-100%);
         z-index: 1;
         cursor: grab;
+        touch-action: pan-y;
 
         .carousel__slide {
             position: relative;

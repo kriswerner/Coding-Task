@@ -3,10 +3,10 @@ import css from "./app.component.scss";
 import data from "./../assets/carousel-data.json";
 import "./carousel/carousel.component";
 
-class MyApp extends HTMLElement {
-    private template: HTMLTemplateElement | undefined;
-    private carouselTemplate: HTMLTemplateElement;
-    private carouselData = data;
+export default class MyApp extends HTMLElement {
+    template: HTMLTemplateElement | undefined;
+    carouselTemplate: HTMLTemplateElement;
+    carouselData = data;
 
     constructor() {
         super();
@@ -23,10 +23,11 @@ class MyApp extends HTMLElement {
         this.template!.content.querySelector('template')!.remove();
 
         // build carousel slides and append them to the shadow root
-        //this.buildCarouselSlides(this.carouselData);
-        //shadowRoot.appendChild(this.template!.content.cloneNode(true));
+        this.buildCarouselSlides(this.carouselData);
+        shadowRoot.appendChild(this.template!.content.cloneNode(true));
 
         // build carousel slides with json data from dummyjson
+        this.template!.content.querySelector('my-carousel')!.innerHTML = "";
         this.fetchJSONFile('https://dummyjson.com/products', (data:any) => {
             this.buildCarouselSlides(data);
             shadowRoot.appendChild(this.template!.content.cloneNode(true));
@@ -34,7 +35,7 @@ class MyApp extends HTMLElement {
     }
 
     // build the carousel slides using the html template and data from json object
-    private buildCarouselSlides(data: any) {
+    buildCarouselSlides(data: any) {
         data.products.forEach((product: any) => {
             const carouselSlide = this.carouselTemplate!.content.cloneNode(true) as HTMLElement;
             carouselSlide.querySelector('img')!.src = product.images[0];
@@ -45,7 +46,7 @@ class MyApp extends HTMLElement {
     }
 
     // request json file and execute a callback with the parsed result
-    private fetchJSONFile(path: any, callback: any) {
+    fetchJSONFile(path: any, callback: any) {
         let httpRequest = new XMLHttpRequest();
         httpRequest.onreadystatechange = function() {
             if (httpRequest.readyState === 4) {

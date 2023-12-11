@@ -1,18 +1,18 @@
 import html from "./carousel.component.html"
 import css from "./carousel.component.scss";
 
-class MyCarousel extends HTMLElement {
-    private carouselContainer: HTMLElement;
-    private carouselPagination: HTMLElement;
-    private carouselSlides: Array<Element> | undefined;
-    private interval: number = 5000;
-    private intervalID: any;
-    private currentSlideIndex: number | undefined = 1;
-    private activeTransition: boolean | undefined;
-    private startTranslatePosition: number | undefined;
-    private currentTranslatePosition: number | undefined;
-    private isDragging: boolean = false;
-    private grabbing: boolean = false;
+export default class MyCarousel extends HTMLElement {
+    carouselContainer: HTMLElement;
+    carouselPagination: HTMLElement;
+    carouselSlides: Array<Element> | undefined;
+    interval: number = 5000;
+    intervalID: any;
+    currentSlideIndex: number | undefined = 1;
+    activeTransition: boolean | undefined;
+    startTranslatePosition: number | undefined;
+    currentTranslatePosition: number | undefined;
+    isDragging: boolean = false;
+    grabbing: boolean = false;
 
     constructor() {
         super();
@@ -43,17 +43,17 @@ class MyCarousel extends HTMLElement {
         });
 
         // Add event listener for mobile and desktop touch events
-        this.carouselContainer.addEventListener('touchstart', (event) => this.touchStart(event));
-        this.carouselContainer.addEventListener('touchend', () => this.touchEnd());
-        this.carouselContainer.addEventListener('touchmove', (event) => this.touchMove(event));
-        this.carouselContainer.addEventListener('mousedown', (event) => this.touchStart(event));
-        this.carouselContainer.addEventListener('mouseup', () => this.touchEnd());
-        this.carouselContainer.addEventListener('mouseleave', () => this.touchEnd());
-        this.carouselContainer.addEventListener('mousemove', (event) => this.touchMove(event));
+        this.carouselContainer?.addEventListener('touchstart', (event) => this.touchStart(event));
+        this.carouselContainer?.addEventListener('touchend', () => this.touchEnd());
+        this.carouselContainer?.addEventListener('touchmove', (event) => this.touchMove(event));
+        this.carouselContainer?.addEventListener('mousedown', (event) => this.touchStart(event));
+        this.carouselContainer?.addEventListener('mouseup', () => this.touchEnd());
+        this.carouselContainer?.addEventListener('mouseleave', () => this.touchEnd());
+        this.carouselContainer?.addEventListener('mousemove', (event) => this.touchMove(event));
 
         // Add event listener for prev/next buttons
-        shadowRoot.querySelector('.carousel__button--prev')!.addEventListener('click', this.prevSlide.bind(this));
-        shadowRoot.querySelector('.carousel__button--next')!.addEventListener('click', this.nextSlide.bind(this));
+        shadowRoot.querySelector('.carousel__button--prev')?.addEventListener('click', this.prevSlide.bind(this));
+        shadowRoot.querySelector('.carousel__button--next')?.addEventListener('click', this.nextSlide.bind(this));
 
         // Disable context menu
         document.addEventListener('contextmenu', event => {
@@ -69,7 +69,7 @@ class MyCarousel extends HTMLElement {
     }
 
     // Transition to the next slide
-    private nextSlide() {
+    nextSlide() {
         if (!this.activeTransition) {
             this.resetCarouselInterval();
 
@@ -97,7 +97,7 @@ class MyCarousel extends HTMLElement {
     }
 
     // Transition to the previous slide
-    private prevSlide() {
+    prevSlide() {
         if (!this.activeTransition) {
             this.resetCarouselInterval();
 
@@ -188,14 +188,12 @@ class MyCarousel extends HTMLElement {
 
     // TouchStart event handling
     private touchStart(event: any) {
-        event.preventDefault();
         this.isDragging = true;
         this.startTranslatePosition = this.getPositionX(event);
     }
 
     // TouchMove event handling
     private touchMove(event: any) {
-        event.preventDefault();
         if (this.isDragging) {
             this.grabbing = true;
             

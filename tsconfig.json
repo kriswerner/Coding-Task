@@ -5,8 +5,13 @@
     "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "lib": ["dom", "ES2015"],
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true,
   },
-  "include": ["src/*.ts", "declarations.d.ts"],
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.ts",
+    "declarations.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

@@ -1,0 +1,1 @@
+module.exports = '<template id="carousel__slide"><div class="carousel__slide"><img src="" /><div class="carousel__slide__content"><h1></h1><p></p><div class="carousel__slide__button carousel__slide__button--primary">Mehr erfahren</div><div class="carousel__slide__button carousel__slide__button--secondary">Kontakt</div></div></div></template><my-carousel></my-carousel>';
